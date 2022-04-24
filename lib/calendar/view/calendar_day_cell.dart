@@ -57,9 +57,9 @@ class _CalendarDayCellState extends State<CalendarDayCell>
   double get _calculateMatrixValue {
     if (widget.dayViewModel.isSameAsFirstDate ||
         widget.dayViewModel.isSameAsSecondDate) {
-      return 1.3;
+      return 1.1;
     }
-    return 1.3;
+    return 1.2;
   }
 
   Alignment get _calculateAlignmentOfScale {
@@ -185,10 +185,10 @@ class _CalendarDayCellState extends State<CalendarDayCell>
                     if (isInRange && widget.dayViewModel.isBothDateSelected)
                       Transform(
                         transform: Matrix4.diagonal3Values(
-                            // Quick fix for gap in overlay on toDate Cell
-                            _calculateMatrixValue,
-                            1.0,
-                            1.0),
+                          _calculateMatrixValue,
+                          1.0,
+                          1.0,
+                        ),
                         alignment: _calculateAlignmentOfScale,
                         origin: _calculateOffset,
                         child: Container(

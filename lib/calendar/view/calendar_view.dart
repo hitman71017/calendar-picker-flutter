@@ -23,12 +23,14 @@ class CalendarView extends StatelessWidget {
       }, builder: (context, __, ___) {
         final months = provider.calendarViewModel.currentMonths;
         return ListView.separated(
+          addAutomaticKeepAlives: true,
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
           itemCount: months.length + 1,
           separatorBuilder: (_, index) {
-            if (!months[index].isAnyDayAfterStaringDate)
+            if (!months[index].isAnyDayAfterStaringDate) {
               return const SizedBox();
+            }
             return index >= months.length - 1
                 ? const SizedBox()
                 : const Divider();
@@ -40,8 +42,9 @@ class CalendarView extends StatelessWidget {
                 height: 48,
               );
             }
-            if (!months[index].isAnyDayAfterStaringDate)
+            if (!months[index].isAnyDayAfterStaringDate) {
               return const SizedBox();
+            }
             return CalendarMonthCell(
               months[index],
             );

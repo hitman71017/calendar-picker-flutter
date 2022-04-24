@@ -32,7 +32,10 @@ class CalendarController {
   DateTime? selectedDate1;
   DateTime? selectedDate2;
 
-  Map<DateTime, String> get currentSubtitles => subtitles[selectingDayIndex];
+  Map<DateTime, String> get currentSubtitles {
+    if (selectingDayIndex >= subtitles.length) return {};
+    return subtitles[selectingDayIndex];
+  }
 
   CalenderMode get mode => _mode;
 

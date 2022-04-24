@@ -10,6 +10,7 @@ class CalendarProvider extends ChangeNotifier {
   late final CalendarViewModel _calendarViewModel;
   final CalendarConfig config;
   bool loadingSubtitles = false;
+  bool loadingDisabledDays = false;
 
   CalendarViewModel get calendarViewModel => _calendarViewModel;
 
@@ -71,11 +72,11 @@ class CalendarProvider extends ChangeNotifier {
   Future<void> loadDisabledDays(
     Future<List<DateTime>> Function() captureFunction,
   ) async {
-    loadingSubtitles = true;
+    loadingDisabledDays = true;
     notifyListeners();
     final dis = await captureFunction();
     getCalenderController.setDisabledDays(dis);
-    loadingSubtitles = false;
+    loadingDisabledDays = false;
     notifyListeners();
   }
 
