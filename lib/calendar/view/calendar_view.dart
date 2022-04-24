@@ -1,8 +1,9 @@
-import 'package:calendar_picker/calendar/provider/calendar_provider.dart';
-import 'package:calendar_picker/calendar/view/calendar_month_cell.dart';
-import 'package:calendar_picker/calendar/view_model/calendar_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../provider/calendar_provider.dart';
+import '../view/calendar_month_cell.dart';
+import '../view_model/calendar_view_model.dart';
 
 class CalendarView extends StatelessWidget {
   final todayDate = DateTime.now();

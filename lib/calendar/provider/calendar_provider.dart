@@ -1,7 +1,7 @@
-import 'package:calendar_picker/calendar/view_model/calendar_config.dart';
-import 'package:calendar_picker/calendar/view_model/calendar_view_model.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+import '../view_model/calendar_config.dart';
+import '../view_model/calendar_view_model.dart';
 
 class CalendarProvider extends ChangeNotifier {
   final int monthsInView;

@@ -1,8 +1,8 @@
-import 'package:calendar_picker/calendar/utilities/utilities.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
 import '../extensions.dart';
+import '../utilities/utilities.dart';
 
 enum CalenderMode {
   georgian,

@@ -1,5 +1,6 @@
-import 'package:calendar_picker/calendar/view/select_date_page.dart';
 import 'package:flutter/material.dart';
+
+import '../calendar/view/select_date_page.dart';
 
 void main() {
   runApp(const MyApp());

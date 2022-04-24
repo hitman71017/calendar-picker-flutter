@@ -1,11 +1,12 @@
-import 'package:calendar_picker/calendar/provider/calendar_provider.dart';
-import 'package:calendar_picker/calendar/utilities/utilities.dart';
-import 'package:calendar_picker/calendar/view/calendar_view.dart';
-import 'package:calendar_picker/calendar/view_model/calendar_config.dart';
-import 'package:calendar_picker/calendar/view_model/calendar_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamsi_date/shamsi_date.dart';
+
+import '../provider/calendar_provider.dart';
+import '../utilities/utilities.dart';
+import '../view/calendar_view.dart';
+import '../view_model/calendar_config.dart';
+import '../view_model/calendar_view_model.dart';
 
 class SelectDatePageView extends StatefulWidget {
   final bool isDoubleSelection;
