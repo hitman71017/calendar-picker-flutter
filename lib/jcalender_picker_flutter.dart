@@ -7,3 +7,5 @@ export 'calendar/view/calendar_text_field.dart';
 export 'calendar/view/calendar_view.dart';
 export 'calendar/view/select_date_page.dart';
 export 'calendar/view/spin_kit.dart';
+export 'calendar/view_model/calendar_config.dart';
+export 'calendar/view_model/calendar_view_model.dart';
