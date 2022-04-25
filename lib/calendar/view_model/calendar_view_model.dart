@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:jcalendar_picker_flutter/calendar/view_model/cell_subtitle.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
 import '../extensions.dart';
@@ -26,14 +27,14 @@ class CalendarController {
   List<DateTime> holidays;
   List<DateTime> disabledDays;
   int _selectingDayIndex;
-  List<Map<DateTime, String>> subtitles;
+  List<List<CellSubtitle>> subtitles;
   CalendarSelectionMode selectionMode;
   CalenderMode _mode = CalenderMode.jalali;
   DateTime? selectedDate1;
   DateTime? selectedDate2;
 
-  Map<DateTime, String> get currentSubtitles {
-    if (selectingDayIndex >= subtitles.length) return {};
+  List<CellSubtitle> get currentSubtitles {
+    if (selectingDayIndex >= subtitles.length) return [];
     return subtitles[selectingDayIndex];
   }
 
@@ -106,7 +107,7 @@ class CalendarController {
     this.holidays = holidays;
   }
 
-  void setSubtitles(List<Map<DateTime, String>> subtitles) {
+  void setSubtitles(List<List<CellSubtitle>> subtitles) {
     this.subtitles = subtitles;
   }
 
@@ -135,7 +136,7 @@ class CalendarController {
     }
     if (selectionMode != CalendarSelectionMode.doubleSelection ||
         selectedDate1 == null) {
-      _selectingDayIndex = 1;
+      _selectingDayIndex = 0;
       selectedDate1 = time;
       return;
     }
@@ -427,12 +428,13 @@ class DayViewModel {
     return true;
   }
 
-  String? get getSubtitle {
+  CellSubtitle? get getSubtitle {
     final d = DateTime(myTime.year, myTime.month, myTime.day);
-    if (_calendarController.currentSubtitles.containsKey(d)) {
-      return _calendarController.currentSubtitles[d];
-    }
-    return null;
+    final list = _calendarController.currentSubtitles.where(
+      (e) => compareDateTimes(e.time, d),
+    );
+    if (list.isEmpty) return null;
+    return list.first;
   }
 
   void taped() {

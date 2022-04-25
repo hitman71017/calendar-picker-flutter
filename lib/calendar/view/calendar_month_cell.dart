@@ -97,6 +97,7 @@ class CalendarMonthCell extends StatelessWidget {
                     return const SizedBox();
                   }
                   return CalendarDayCell(
+                    key: Key(index.toString()),
                     dayViewModel: monthViewModel.days[index - startingIndex],
                   );
                 },

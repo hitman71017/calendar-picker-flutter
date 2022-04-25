@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jcalendar_picker_flutter/calendar/view_model/cell_subtitle.dart';
 
 import '../view_model/calendar_config.dart';
 import '../view_model/calendar_view_model.dart';
@@ -59,7 +60,7 @@ class CalendarProvider extends ChangeNotifier {
   }
 
   Future<void> loadSubTitle(
-    Future<List<Map<DateTime, String>>> Function() captureFunction,
+    Future<List<List<CellSubtitle>>> Function() captureFunction,
   ) async {
     loadingSubtitles = true;
     notifyListeners();

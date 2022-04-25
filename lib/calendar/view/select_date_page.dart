@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jcalendar_picker_flutter/calendar/view_model/cell_subtitle.dart';
 import 'package:provider/provider.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
@@ -61,8 +62,26 @@ class _SelectDatePageViewState extends State<SelectDatePageView> {
       ),
     );
     if (widget.isDoubleSelection) {
-      calendarProvider.switchToRangeSelection();
+      calendarProvider.switchToSingleSelection();
     }
+    calendarProvider.loadSubTitle(() async {
+      await Future.delayed(Duration.zero);
+      final now = DateTime.now();
+      return [
+        List.generate(
+          16,
+          (index) => CellSubtitle(
+            time: DateTime(
+              now.year,
+              now.month,
+              (now.day + index * index + 1).floor(),
+            ),
+            string: index.toString(),
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+        ),
+      ];
+    });
     calendarProvider.loadDisabledDays(() async {
       final now = DateTime.now();
       return List.generate(
@@ -79,7 +98,7 @@ class _SelectDatePageViewState extends State<SelectDatePageView> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => Future.value(true),
+      onWillPop: () => Future.value(false),
       child: ChangeNotifierProvider.value(
         value: calendarProvider,
         child: Directionality(

@@ -145,8 +145,7 @@ class _CalendarDayCellState extends State<CalendarDayCell>
   }
 
   Widget _buildSubTitle(BuildContext context, bool isSelected) {
-    if (widget.dayViewModel.getSubtitle == null) return const SizedBox();
-    return Text(widget.dayViewModel.getSubtitle!);
+    return widget.dayViewModel.getSubtitle?.build(context) ?? const SizedBox();
   }
 
   @override
@@ -210,26 +209,16 @@ class _CalendarDayCellState extends State<CalendarDayCell>
                   ],
                 );
               },
-              child: AnimatedBuilder(
-                animation: animation,
-                builder: (context, child) => Container(
-                  decoration: BoxDecoration(
-                      color: getColor,
-                      borderRadius: BorderRadius.circular(6),
-                      border: !widget.dayViewModel.isBetweenSelectedDates
-                          ? Border.all(
-                              color: getBorderColor,
-                              width: 1,
-                            )
-                          : null,
-                      boxShadow: [
-                        BoxShadow(
-                          spreadRadius: 1.0 - animation.value,
-                          color: getShadowColor,
-                          blurRadius: 5.0 - animation.value,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: getColor,
+                  borderRadius: BorderRadius.circular(6),
+                  border: !widget.dayViewModel.isBetweenSelectedDates
+                      ? Border.all(
+                          color: getBorderColor,
+                          width: 1,
                         )
-                      ]),
-                  child: child,
+                      : null,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -243,28 +232,19 @@ class _CalendarDayCellState extends State<CalendarDayCell>
                       ),
                     ),
                     if (widget.dayViewModel.isAfterStartDate)
-                      Selector<CalendarProvider, bool>(
-                        shouldRebuild: (previous, next) {
-                          return previous != next || !next;
-                        },
-                        selector: (context, provider) {
-                          return provider.loadingSubtitles;
-                        },
-                        builder: (context, loading, child) {
+                      Consumer<CalendarProvider>(
+                        builder: (context, provider, child) {
                           return SizeTransition(
                             sizeFactor: animation,
                             axis: Axis.vertical,
-                            child: loading
+                            child: provider.loadingSubtitles
                                 ? const SpinKitThreeBounceFade()
-                                : Builder(
-                                    builder: (context) {
-                                      return Center(
-                                          child: _buildSubTitle(
-                                        context,
-                                        widget.dayViewModel
-                                            .isBetweenSelectedDates,
-                                      ));
-                                    },
+                                : Center(
+                                    child: _buildSubTitle(
+                                      context,
+                                      widget
+                                          .dayViewModel.isBetweenSelectedDates,
+                                    ),
                                   ),
                           );
                         },
