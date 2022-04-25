@@ -93,7 +93,14 @@ class CalendarController {
                 : selectedDate2)
             : null,
         _lock = lock,
-        _selectingDayIndex = 0;
+        _selectingDayIndex = 0 {
+    if (selectedDate1 != null) {
+      _selectingDayIndex = 1;
+    }
+    if (selectedDate2 != null) {
+      _selectingDayIndex = 0;
+    }
+  }
 
   void lock() {
     _lock = true;
@@ -134,9 +141,12 @@ class CalendarController {
     ).isNotEmpty) {
       return;
     }
-    if (selectionMode != CalendarSelectionMode.doubleSelection ||
-        selectedDate1 == null) {
-      _selectingDayIndex = 0;
+    if (selectedDate1 == null) {
+      if (selectionMode == CalendarSelectionMode.doubleSelection) {
+        _selectingDayIndex = 1;
+      } else {
+        _selectingDayIndex = 0;
+      }
       selectedDate1 = time;
       return;
     }
@@ -144,6 +154,7 @@ class CalendarController {
     if (selectionMode == CalendarSelectionMode.doubleSelection &&
         selectedDate2 == null) {
       if (time.compareTo(selectedDate1!) == 0) {
+        _selectingDayIndex = 0;
         selectedDate1 = null;
         return;
       }
@@ -156,7 +167,7 @@ class CalendarController {
           break;
         }
       }
-      if (selectedDate2 != null) _selectingDayIndex = 1;
+      if (selectedDate2 != null) _selectingDayIndex = 0;
       return;
     }
     reset();

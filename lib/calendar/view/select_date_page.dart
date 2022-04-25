@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:jcalendar_picker_flutter/calendar/view_model/cell_subtitle.dart';
+import 'package:jcalendar_picker_flutter/jcalender_picker_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
-import '../provider/calendar_provider.dart';
-import '../utilities/utilities.dart';
-import '../view/calendar_view.dart';
-import '../view_model/calendar_config.dart';
-import '../view_model/calendar_view_model.dart';
-
 class SelectDatePageView extends StatefulWidget {
   final bool isDoubleSelection;
+  final bool isAlwaysDoubleSelection;
 
   const SelectDatePageView({
     required this.isDoubleSelection,
+    this.isAlwaysDoubleSelection = false,
     Key? key,
   }) : super(key: key);
 
@@ -48,6 +45,8 @@ class _SelectDatePageViewState extends State<SelectDatePageView> {
     final now = DateTime.now();
     calendarProvider = CalendarProvider(
       startingDate: DateTime(now.year, now.month, now.day),
+      selectedDate1: now.add(Duration(days: 6)),
+      selectedDate2: now.add(Duration(days: 8)),
       config: const CalendarConfig(
         backgroundColor: Colors.white70,
         monthBarBackgroundColor: Color(0xffdfdfdf),
@@ -62,7 +61,7 @@ class _SelectDatePageViewState extends State<SelectDatePageView> {
       ),
     );
     if (widget.isDoubleSelection) {
-      calendarProvider.switchToSingleSelection();
+      calendarProvider.switchToRangeSelection();
     }
     calendarProvider.loadSubTitle(() async {
       await Future.delayed(Duration.zero);
@@ -105,6 +104,13 @@ class _SelectDatePageViewState extends State<SelectDatePageView> {
           textDirection: TextDirection.rtl,
           child: Column(
             children: <Widget>[
+              Transform.scale(
+                scale: 1.01,
+                child: Container(
+                  color: Colors.blue,
+                  child: _buildTextFields(context),
+                ),
+              ),
               Expanded(
                 child: Stack(
                   children: <Widget>[
@@ -118,6 +124,69 @@ class _SelectDatePageViewState extends State<SelectDatePageView> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTextFields(BuildContext context) {
+    final isRangeSelection = _calendarController.selectionMode !=
+        CalendarSelectionMode.singleSelection;
+
+    return Consumer<CalendarProvider>(
+      builder: (c, p, w) {
+        final isSelectingFrom = getIsSelectingFrom(p, isRangeSelection);
+        final isSelectingTo = getIsSelectingTo(p, isRangeSelection);
+        return Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 23, right: 23, top: 10),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: SizedBox(
+                      height: 40,
+                      child: CalendarTextField(
+                        //  isFocused: isFocusedFrom,
+                        isFocused: isSelectingFrom,
+                        isSelected:
+                            _calendarController.beginSelectedDate != null,
+                        placeHolder: widget.isAlwaysDoubleSelection
+                            ? 'تاریخ ورود'
+                            : 'تاریخ رفت',
+                        title: actionBeginText,
+                        alwaysWhite: true,
+                      ),
+                    ),
+                  ),
+                  if (isRangeSelection)
+                    const SizedBox(
+                      width: 20,
+                    ),
+                  if (isRangeSelection)
+                    Expanded(
+                      child: SizedBox(
+                        height: 40,
+                        child: CalendarTextField(
+                          isRemovable: !widget.isAlwaysDoubleSelection,
+                          //  isFocused: isFocusedTo,
+                          isFocused: isSelectingTo,
+                          isSelected:
+                              _calendarController.endSelectedDate != null,
+                          placeHolder: widget.isAlwaysDoubleSelection
+                              ? 'تاریخ خروج'
+                              : 'تاریخ برگشت',
+                          title: actionEndText,
+                        ),
+                      ),
+                    )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        );
+      },
     );
   }
 

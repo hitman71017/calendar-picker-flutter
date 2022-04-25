@@ -54,7 +54,7 @@ class _CalendarTextFieldState extends State<CalendarTextField> {
             color: isEnabled || widget.alwaysWhite
                 ? widget.isFocused
                     ? Colors.white
-                    : Colors.grey
+                    : Colors.white70
                 : Colors.white70,
           ),
           child: Row(

@@ -39,12 +39,16 @@ class CalendarProvider extends ChangeNotifier {
     required this.startingDate,
     required this.config,
     CalendarSelectionMode mode = CalendarSelectionMode.singleSelection,
+    DateTime? selectedDate1,
+    DateTime? selectedDate2,
   }) : _calendarViewModel = CalendarViewModel(
           startingDate: startingDate,
           monthsInView: monthsInView,
           scrollController: ScrollController(),
           startingDateView: DateTime.now(),
           calendarSelectionMode: mode,
+          selectedDate1: selectedDate1,
+          selectedDate2: selectedDate2,
         );
 
   Future<void> loadHolidays(
@@ -110,7 +114,8 @@ class CalendarProvider extends ChangeNotifier {
   }
 
   void switchToSingleSelection() {
-    getCalenderController.selectionMode = CalendarSelectionMode.singleSelection;
+    getCalenderController.selectionMode =
+        CalendarSelectionMode.disabledDoubleSelection;
     notifyListeners();
   }
 
