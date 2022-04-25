@@ -91,7 +91,8 @@ class CalendarController {
             : null,
         _lock = lock,
         _selectingDayIndex = 0 {
-    if (selectedDate1 != null) {
+    if (selectedDate1 != null &&
+        selectionMode == CalendarSelectionMode.doubleSelection) {
       _selectingDayIndex = 1;
     }
     if (selectedDate2 != null) {
