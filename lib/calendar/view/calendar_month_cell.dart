@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:jcalendar_picker_flutter/calendar/view/calendar_day_cell.dart';
+import 'package:jcalendar_picker_flutter/calendar/view_model/calendar_view_model.dart';
+import 'package:jcalendar_picker_flutter/jcalender_picker_flutter.dart';
 import 'package:provider/provider.dart';
-
-import '../provider/calendar_provider.dart';
-import '../view/calendar_day_cell.dart';
-import '../view_model/calendar_view_model.dart';
 
 class CalendarMonthCell extends StatelessWidget {
   final MonthViewModel monthViewModel;

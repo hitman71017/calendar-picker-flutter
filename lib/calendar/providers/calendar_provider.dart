@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jcalendar_picker_flutter/calendar/view_model/cell_subtitle.dart';
+import 'package:jcalendar_picker_flutter/jcalender_picker_flutter.dart';
 
-import '../view_model/calendar_config.dart';
 import '../view_model/calendar_view_model.dart';
 
 class CalendarProvider extends ChangeNotifier {

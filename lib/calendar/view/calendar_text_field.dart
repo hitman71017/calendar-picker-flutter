@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jcalendar_picker_flutter/jcalender_picker_flutter.dart';
 import 'package:provider/provider.dart';
-
-import '../provider/calendar_provider.dart';
-import '../view_model/calendar_view_model.dart';
 
 class CalendarTextField extends StatefulWidget {
   final bool isFocused;

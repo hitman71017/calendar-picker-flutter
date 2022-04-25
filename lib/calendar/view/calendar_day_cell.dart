@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/calendar_provider.dart';
+import '../providers/calendar_provider.dart';
 import '../view/spin_kit.dart';
 import '../view_model/calendar_config.dart';
 import '../view_model/calendar_view_model.dart';

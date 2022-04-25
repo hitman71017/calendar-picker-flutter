@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jcalendar_picker_flutter/calendar/utilities/utilities.dart';
 import 'package:jcalendar_picker_flutter/calendar/view/calendar_text_field.dart';
-import 'package:jcalendar_picker_flutter/calendar/view_model/calendar_view_model.dart';
 import 'package:jcalendar_picker_flutter/jcalender_picker_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shamsi_date/shamsi_date.dart';
