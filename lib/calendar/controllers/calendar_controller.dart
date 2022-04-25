@@ -138,7 +138,8 @@ class CalendarController {
     ).isNotEmpty) {
       return;
     }
-    if (selectedDate1 == null) {
+    if (selectedDate1 == null ||
+        selectionMode == CalendarSelectionMode.disabledDoubleSelection) {
       if (selectionMode == CalendarSelectionMode.doubleSelection) {
         _selectingDayIndex = 1;
       } else {
