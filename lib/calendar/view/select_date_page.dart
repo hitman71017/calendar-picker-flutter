@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jcalendar_picker_flutter/calendar/view_model/cell_subtitle.dart';
+import 'package:jcalendar_picker_flutter/calendar/utilities/utilities.dart';
+import 'package:jcalendar_picker_flutter/calendar/view/calendar_text_field.dart';
+import 'package:jcalendar_picker_flutter/calendar/view_model/calendar_view_model.dart';
 import 'package:jcalendar_picker_flutter/jcalender_picker_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shamsi_date/shamsi_date.dart';
@@ -45,8 +47,8 @@ class _SelectDatePageViewState extends State<SelectDatePageView> {
     final now = DateTime.now();
     calendarProvider = CalendarProvider(
       startingDate: DateTime(now.year, now.month, now.day),
-      selectedDate1: now.add(Duration(days: 6)),
-      selectedDate2: now.add(Duration(days: 8)),
+      selectedDate1: now.add(const Duration(days: 6)),
+      selectedDate2: now.add(const Duration(days: 8)),
       config: const CalendarConfig(
         backgroundColor: Colors.white70,
         monthBarBackgroundColor: Color(0xffdfdfdf),
