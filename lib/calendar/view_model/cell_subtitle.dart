@@ -4,7 +4,7 @@ class CellSubtitle {
   final String? string;
   final TextStyle? style;
   final DateTime time;
-  final Widget Function()? builder;
+  final Widget Function(BuildContext context)? builder;
 
   CellSubtitle({
     required this.time,
@@ -23,7 +23,7 @@ class CellSubtitle {
   bool get hasBuilder => builder != null;
 
   Widget build(BuildContext context) {
-    return builder?.call() ??
+    return builder?.call(context) ??
         Text(
           string!,
           style: style,
