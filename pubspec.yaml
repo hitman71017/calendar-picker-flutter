@@ -2,7 +2,7 @@ name: jcalendar_picker_flutter
 
 description: jcalendar picker
 
-version: 1.0.8
+version: 1.0.9
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

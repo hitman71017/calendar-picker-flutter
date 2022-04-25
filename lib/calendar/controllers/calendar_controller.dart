@@ -140,11 +140,15 @@ class CalendarController {
       return;
     }
     if (selectedDate1 == null ||
-        selectionMode == CalendarSelectionMode.disabledDoubleSelection) {
+        selectionMode != CalendarSelectionMode.doubleSelection) {
       if (selectionMode == CalendarSelectionMode.doubleSelection) {
         _selectingDayIndex = 1;
       } else {
         _selectingDayIndex = 0;
+      }
+      if (selectedDate1 != null && compareDateTimes(selectedDate1!, time)) {
+        selectedDate1 = null;
+        return;
       }
       selectedDate1 = time;
       return;
@@ -169,11 +173,11 @@ class CalendarController {
       if (selectedDate2 != null) _selectingDayIndex = 0;
       return;
     }
-    reset();
+    reset(time);
   }
 
-  void reset() {
-    selectedDate1 = null;
+  void reset([DateTime? time]) {
+    selectedDate1 = time;
     selectedDate2 = null;
     _selectingDayIndex = 0;
   }
